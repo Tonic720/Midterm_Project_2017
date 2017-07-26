@@ -8,7 +8,7 @@ public class Hold_Throw : MonoBehaviour {
 
 	public  float throwForce = 10;
 	bool hasPlayer = false; // checks if player is in range
-	bool beingCarried = false;
+	bool beingCarried = false; // check if object is being carried currently 
 
 	private bool touched = false;
 
@@ -21,7 +21,7 @@ public class Hold_Throw : MonoBehaviour {
 	void Update () {
 		float dis = Vector3.Distance (gameObject.transform.position, player.transform.position);
 
-		if (dis <= 2.5f) {
+		if (dis <= 1.0f) {
 			hasPlayer = true;
 		} else {
 			hasPlayer = false;
@@ -31,7 +31,7 @@ public class Hold_Throw : MonoBehaviour {
 			GetComponent<Rigidbody> ().isKinematic = true;
 			transform.parent = playerCam;
 			beingCarried = true;
-		}
+		} 
 		if (beingCarried) {
 
 			if (touched) {
@@ -56,10 +56,16 @@ public class Hold_Throw : MonoBehaviour {
 
 		}
 	}
-	void OnTriggerEnter(){
+	void OnTriggerEnter(Collider col){
 		if(beingCarried){
 			touched = true;
 		}
+
+		if (col.CompareTag ("Floor")) {
+			Destroy (gameObject);
+		}
+
+
 	}
 
 
