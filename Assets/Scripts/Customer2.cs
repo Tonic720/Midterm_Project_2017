@@ -3,14 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 public class Customer2 : MonoBehaviour {
 	public Transform target;
 	public Transform target2;
 	public Transform adam;
 	public Transform player; 
 	public Text orderText;
+
 	public Order_Crate crate;
 	public Customer_Move cus1;
+
+	public Text timeLimit;
+	public float timeLeft = 35;
 
 	public bool chedderGot = false;
 	public bool swissGot = false;
@@ -28,6 +33,23 @@ public class Customer2 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//if (crate.chedder2Counter > 4 || crate.swiss2Counter > 4 || crate.gouda2Counter > 4) {
+		//	SceneManager.LoadScene ("GameOver"); Code did not work
+		//}
+
+		// Fixed version
+		if (crate.chedder2Counter > 5 ) {
+			SceneManager.LoadScene ("GameOver");
+		}
+		if (crate.swiss2Counter > 5  ) {
+			SceneManager.LoadScene ("GameOver");
+		}
+		if (crate.gouda2Counter > 5 ) {
+			SceneManager.LoadScene ("GameOver");
+			//orderText.text += "Count of gouda " + crate.gouda2Counter;
+		}
+
+		 
 		if (chedderGot == true && swissGot == true && goudaGot) {
 			orderComplete = true;
 		} else {
@@ -36,7 +58,7 @@ public class Customer2 : MonoBehaviour {
 
 
 
-		if (Vector3.Distance (adam.position, transform.position) < 4f && Vector3.Distance (player.position, transform.position) < 3f) {
+		if (Vector3.Distance (adam.position, transform.position) < 4f && Vector3.Distance (player.position, transform.position) < 10f) {
 			orderText.text = "Give me some Chedder, some Swiss and you know what let's do some Gouda";
 		} else {
 			orderText.text = " ";
@@ -47,6 +69,17 @@ public class Customer2 : MonoBehaviour {
 		} else if (orderComplete) {
 			agent.SetDestination (target2.position);
 
+		}
+
+		if (Vector3.Distance (adam.position, transform.position) < 4f) {
+			timeLeft -= Time.deltaTime;
+			timeLimit.text = "Timer: " + timeLeft;
+		} 
+		if(orderComplete){
+			timeLimit.text = "";
+		}
+		if (timeLeft <= 0) {
+			SceneManager.LoadScene ("GameOver");
 		}
 
 		GotOrder ();

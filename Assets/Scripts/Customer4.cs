@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
-
+using UnityEngine.SceneManagement;
 public class Customer4 : MonoBehaviour {
 
 	public Transform target;
@@ -21,6 +21,9 @@ public class Customer4 : MonoBehaviour {
 	//public int chedder = 0;
 	public bool orderComplete;
 
+	public Text timeLimit;
+	public float timeLeft = 35;
+
 	NavMeshAgent agent;
 	// Use this for initialization
 	void Start () {
@@ -32,6 +35,21 @@ public class Customer4 : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		//if (crate.chedder4Count > 4 || crate.swiss4Count > 6 || crate.gouda4Count > 6) {
+			//SceneManager.LoadScene ("GameOver");
+		//}
+
+		if (crate.chedder4Count > 3 ) {
+			SceneManager.LoadScene ("GameOver");
+		}
+		if (crate.swiss4Count > 7   ) {
+			SceneManager.LoadScene ("GameOver");
+		}
+		if (crate.gouda4Count > 7 ) {
+			SceneManager.LoadScene ("GameOver");
+		}
+
+
 		if (crate.swiss4Count >= 4) {
 			swissGot = true;
 		}
@@ -47,8 +65,8 @@ public class Customer4 : MonoBehaviour {
 
 
 
-		if (Vector3.Distance (adam.position, transform.position) < 4f && Vector3.Distance (player.position, transform.position) < 3f) {
-			orderText.text = "Hey could i get like 2 Wedges of swiss and gouda along with one block of chedder";
+		if (Vector3.Distance (adam.position, transform.position) < 4f && Vector3.Distance (player.position, transform.position) < 10f) {
+			orderText.text = "Hey could i get like two Wedges of swiss and two of gouda along with one block of chedder";
 		} else {
 			orderText.text = " ";
 		}
@@ -58,6 +76,23 @@ public class Customer4 : MonoBehaviour {
 		} else if (orderComplete) {
 			agent.SetDestination (target2.position);
 
+		}
+
+		if (orderComplete) {
+
+			orderText.text = "Hey Kid you shift is over for the day good job";
+
+
+		}
+		if (Vector3.Distance (adam.position, transform.position) < 4f) {
+			timeLeft -= Time.deltaTime;
+			timeLimit.text = "Timer: " + timeLeft;
+		}
+		if(orderComplete){
+			timeLimit.text = "";
+		}
+		if (timeLeft <= 0) {
+			SceneManager.LoadScene ("GameOver");
 		}
 
 		GotOrder ();

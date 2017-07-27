@@ -35,10 +35,21 @@ public class Customer_Move : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
+		 
+
+		if (crate.chedder1Counter > 3 ) {
+			SceneManager.LoadScene ("GameOver");
+		}
+		if (crate.swiss1Counter > 3   ) {
+			SceneManager.LoadScene ("GameOver");
+		}
+		if (crate.gouda1Counter > 0 ) {
+			SceneManager.LoadScene ("GameOver");
+		}
 
 
 
-		timeLimit.text = "Timer: " + timeLeft;
+
 
 
 		if (chedderGot == true && swissGot == true) {
@@ -52,15 +63,20 @@ public class Customer_Move : MonoBehaviour {
 			
 		}
 
-		if (Vector3.Distance (adam.position, transform.position) < 4f && Vector3.Distance (player.position, transform.position) < 3f) {
-			orderText.text = "Hey i would like half a pound of swiss and chedder and hurry it up I'm in a rush";
+		if (Vector3.Distance (adam.position, transform.position) < 4f && Vector3.Distance (player.position, transform.position) < 10f) {
+			orderText.text = "Hey I would like half a pound of swiss and chedder and hurry it up I'm in a rush";
 
 		} else {
 			orderText.text = " ";
 		}
 		if (Vector3.Distance (adam.position, transform.position) < 4f) {
 			timeLeft -= Time.deltaTime;
+			timeLimit.text = "Timer: " + timeLeft;
+		} 
+		if(orderComplete){
+			timeLimit.text = "";
 		}
+
 
 		if (timeLeft <= 0) {
 			SceneManager.LoadScene ("GameOver");

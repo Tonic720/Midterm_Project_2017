@@ -6,6 +6,7 @@ public class Spawn_Cheese : MonoBehaviour {
 
 	public GameObject cheese;
 	public Transform player;
+	public bool canSpawn;
 	// Use this for initialization
 	void Start () {
 		
@@ -14,9 +15,16 @@ public class Spawn_Cheese : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (Input.GetKeyDown(KeyCode.R) && Vector3.Distance (player.position, transform.position) < 1f) {
+		if (Vector3.Distance (player.position, transform.position) < 1f) {
 
-			Instantiate (cheese, transform.position, transform.rotation);
+
+
+			if (Input.GetKeyDown (KeyCode.Q) && canSpawn) {
+				Instantiate (cheese, transform.position, transform.rotation);
+				canSpawn = false;
+			}
+		} else if (Vector3.Distance (player.position, transform.position) > 1f) {
+			canSpawn = true;
 		}
 		
 	}
