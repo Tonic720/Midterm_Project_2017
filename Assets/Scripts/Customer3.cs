@@ -43,13 +43,13 @@ public class Customer3 : MonoBehaviour {
 
 
 		// Fixed version
-		if (crate.chedder3 > 6 ) {
+		if (crate.chedder3 > 4 ) {
 			SceneManager.LoadScene ("GameOver");
 		}
-		if (crate.swiss3Counter> 4   ) {
+		if (crate.swiss3Counter > 3   ) {
 			SceneManager.LoadScene ("GameOver");
 		}
-		if (crate.gouda3Counter > 4 ) {
+		if (crate.gouda3Counter > 3 ) {
 			SceneManager.LoadScene ("GameOver");
 		}
 

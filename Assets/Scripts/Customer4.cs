@@ -42,10 +42,10 @@ public class Customer4 : MonoBehaviour {
 		if (crate.chedder4Count > 3 ) {
 			SceneManager.LoadScene ("GameOver");
 		}
-		if (crate.swiss4Count > 7   ) {
+		if (crate.swiss4Count > 4   ) {
 			SceneManager.LoadScene ("GameOver");
 		}
-		if (crate.gouda4Count > 7 ) {
+		if (crate.gouda4Count > 4 ) {
 			SceneManager.LoadScene ("GameOver");
 		}
 
@@ -66,7 +66,7 @@ public class Customer4 : MonoBehaviour {
 
 
 		if (Vector3.Distance (adam.position, transform.position) < 4f && Vector3.Distance (player.position, transform.position) < 10f) {
-			orderText.text = "Hey could i get like two Wedges of swiss and two of gouda along with one block of chedder";
+			orderText.text = "Hey could I get like two Wedges of swiss and two of gouda along with one block of cheddar";
 		} else {
 			orderText.text = " ";
 		}

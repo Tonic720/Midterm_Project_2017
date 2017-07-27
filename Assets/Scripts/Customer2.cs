@@ -38,13 +38,13 @@ public class Customer2 : MonoBehaviour {
 		//}
 
 		// Fixed version
-		if (crate.chedder2Counter > 5 ) {
+		if (crate.chedder2Counter > 3 ) {
 			SceneManager.LoadScene ("GameOver");
 		}
-		if (crate.swiss2Counter > 5  ) {
+		if (crate.swiss2Counter > 3  ) {
 			SceneManager.LoadScene ("GameOver");
 		}
-		if (crate.gouda2Counter > 5 ) {
+		if (crate.gouda2Counter > 3) {
 			SceneManager.LoadScene ("GameOver");
 			//orderText.text += "Count of gouda " + crate.gouda2Counter;
 		}
